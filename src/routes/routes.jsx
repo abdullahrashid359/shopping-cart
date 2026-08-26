@@ -1,4 +1,4 @@
-import Layout from '../components/Layout.jsx';
+import App from '../App.jsx';
 import Home from '../pages/Home.jsx'
 import Shop from '../pages/Shop.jsx'
 import Cart from '../pages/Cart.jsx'
@@ -7,7 +7,7 @@ import ErrorPage from '../components/ErrorPage.jsx';
 const routes = [
   {
     path: '/',
-    element: <Layout />,
+    element: <App />,
     children: [
         {
             index: true,

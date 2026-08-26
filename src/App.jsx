@@ -1,20 +1,44 @@
 import { useState } from "react";
+import { Outlet } from "react-router";
+import Navbar from "./components/Navbar.jsx";
 
 const App = () => {
-  const [heading, setHeading] = useState("Magnificent Monkeys");
+    const [cart, setCart] = useState([]);
 
-  const clickHandler = () => {
-    setHeading("Radical Rhinos");
-  };
+    const addToCartHandler = (product) => {
+      if(cart.some(cartItem => cartItem.id === product.id)) 
+        setCart(cart.map(cartItem => {
+          if(cartItem.id == product.id)
+            return {...cartItem, quantity: cartItem.quantity + product.quantity};
+          
+          return cartItem;
+      }));
+      else
+        setCart([...cart, product]);
+    }
 
-  return (
-    <>
-      <button type="button" onClick={clickHandler}>
-        Click Me
-      </button>
-      <h1>{heading}</h1>
-    </>
-  );
-};
+    const updateCartItemQuantity = (id, newQuantity) => {
+      if(newQuantity === 0)
+        removeCartItem(id);
+      else 
+        setCart(cart.map(cartItem => {
+          if(cartItem.id === id)
+            return {...cartItem, quantity: newQuantity};
+
+          return cartItem;
+      }))
+    }
+
+    const removeCartItem = (id) => {
+      setCart(cart.filter(cartItem => cartItem.id !== id));
+    }
+
+    return (
+        <div id="app-container">
+            <Navbar />
+            <Outlet context={{cart, addToCartHandler, updateCartItemQuantity, removeCartItem}}/>
+        </div>
+    )
+}
 
 export default App;

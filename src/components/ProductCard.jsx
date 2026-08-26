@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ProductCard = ({title, price, imgUrl}) => {
+const ProductCard = ({id, title, price, imgUrl, onAddToCart}) => {
     const [quantity, setQuantity] = useState(1);
     
     const handleQuantityChange = (e) => {
@@ -33,7 +33,7 @@ const ProductCard = ({title, price, imgUrl}) => {
                 <input type="number" value={quantity} onChange={handleQuantityChange} min={1} max={100}/>
                 <button type="button" onClick={handleIncreaseQuantity} disabled={quantity >= 100 || quantity === ""}>+</button>
             </div>
-            <button type="button">Add to cart</button>
+            <button type="button" onClick={() => onAddToCart({id, title, price, imgUrl, quantity})} disabled={quantity === ""}>Add to cart</button>
         </article>
     )
 };
