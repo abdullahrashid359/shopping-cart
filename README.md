@@ -6,7 +6,7 @@ The application fetches product data from the FakeStore API and uses React Route
 
 ## Live Demo
 
-**Live:** To be updated after deployment.
+**Live:** https://riwaaj.netlify.app/
 
 ## Screenshots
 
