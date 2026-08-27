@@ -33,10 +33,14 @@ const App = () => {
       setCart(cart.filter(cartItem => cartItem.id !== id));
     }
 
+    const clearCart = () => {
+      setCart([]);
+    }
+
     return (
         <div id="app-container">
-            <Navbar />
-            <Outlet context={{cart, addToCartHandler, updateCartItemQuantity, removeCartItem}}/>
+            <Navbar cart={cart}/>
+            <Outlet context={{cart, addToCartHandler, updateCartItemQuantity, removeCartItem,clearCart}}/>
         </div>
     )
 }

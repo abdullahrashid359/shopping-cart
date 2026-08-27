@@ -1,0 +1,128 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background-color: var(--color-background);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgb(0 0 0 / 8%);
+}
+
+.imageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 280px;
+    padding: 1.5rem;
+    background-color: var(--color-surface);
+}
+
+.imageContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.25rem;
+}
+
+.content h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.price {
+    margin: 0.75rem 0 1.25rem;
+    color: var(--color-text);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+}
+
+.quantityControls button {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-size: 1.1rem;
+}
+
+.quantityControls button:first-child {
+    border-radius: 0.35rem 0 0 0.35rem;
+}
+
+.quantityControls button:last-child {
+    border-radius: 0 0.35rem 0.35rem 0;
+}
+
+.quantityControls button:hover:not(:disabled) {
+    background-color: var(--color-border);
+}
+
+.quantityControls button:disabled {
+    opacity: 0.5;
+}
+
+.quantityControls input {
+    width: 3rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-border);
+    border-left: 0;
+    border-right: 0;
+    text-align: center;
+    color: var(--color-text);
+    background-color: var(--color-background);
+}
+
+.addButton {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border: 0;
+    border-radius: 0.35rem;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    font-weight: 600;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.addButton:hover:not(:disabled) {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+}
+
+.addButton:disabled {
+    opacity: 0.5;
+}
+
+.quantityControls input::-webkit-outer-spin-button,
+.quantityControls input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantityControls input {
+    appearance: textfield;
+}

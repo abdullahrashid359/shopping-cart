@@ -1,0 +1,33 @@
+.shop {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 5%;
+}
+
+.heading {
+    margin: 0 0 2.5rem;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--color-text);
+    text-align: center;
+}
+
+.productGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+}
+
+.status,
+.error {
+    margin: 0;
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+.status {
+    color: var(--color-text-muted);
+}
+
+.error {
+    color: var(--color-danger);
+}

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router";
 import ProductCard from "../components/ProductCard.jsx";
+import styles from "../styles/Shop.module.css";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const {addToCartHandler} = useOutletContext();
+    const { addToCartHandler } = useOutletContext();
 
     useEffect(() => {
         const startFetching = async () => {
@@ -14,7 +15,7 @@ const Shop = () => {
                 const response = await fetch("https://fakestoreapi.com/products");
 
 
-                if(!response.ok)
+                if (!response.ok)
                     throw new Error("Failed to load products. Please try again.");
 
                 const data = await response.json();
@@ -29,19 +30,18 @@ const Shop = () => {
         startFetching();
     }, []);
 
-    if(loading)
-        return <p>Loading products</p>
+    if (loading)
+        return <p className={styles.status}>Loading products...</p>;
 
-    if(error)   
-        return <p>{error.message}</p>
-
+    if (error)
+        return <p className={styles.error}>{error.message}</p>;
 
     return (
-        <main>
-            <h2>Find your next favorite piece</h2>
+        <main className={styles.shop}>
+            <h2 className={styles.heading}>Find your next favorite piece</h2>
 
-            <section>
-                {products.map(product => <ProductCard key={product.id} id={product.id} title={product.title} price={product.price} imgUrl={product.image} onAddToCart={addToCartHandler}/>)}
+            <section className={styles.productGrid}>
+                {products.map(product => <ProductCard key={product.id} id={product.id} title={product.title} price={product.price} imgUrl={product.image} onAddToCart={addToCartHandler} />)}
             </section>
         </main>
     )

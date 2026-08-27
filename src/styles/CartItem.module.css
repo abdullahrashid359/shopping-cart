@@ -1,0 +1,159 @@
+.item {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr) auto;
+    grid-template-areas:
+        "image details remove"
+        "image details total";
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background-color: var(--color-background);
+    position: relative;
+}
+
+.image {
+    grid-area: image;
+}
+
+.details {
+    grid-area: details;
+    min-width: 0;
+}
+
+.removeButton {
+    grid-area: remove;
+    align-self: start;
+}
+
+.itemTotal {
+    grid-area: total;
+    margin: 0;
+    font-weight: 700;
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+.details h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.price {
+    margin: 0.5rem 0 1rem;
+    color: var(--color-text-muted);
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+}
+
+.quantityControls button {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-size: 1.1rem;
+}
+
+.quantityControls button:first-child {
+    border-radius: 0.35rem 0 0 0.35rem;
+}
+
+.quantityControls button:last-child {
+    border-radius: 0 0.35rem 0.35rem 0;
+}
+
+.quantityControls button:hover:not(:disabled) {
+    background-color: var(--color-border);
+}
+
+.quantityControls button:disabled {
+    opacity: 0.5;
+}
+
+.quantityControls input {
+    width: 3rem;
+    height: 2.5rem;
+    border: 1px solid var(--color-border);
+    border-left: 0;
+    border-right: 0;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    text-align: center;
+    appearance: textfield;
+}
+
+.quantityControls input::-webkit-outer-spin-button,
+.quantityControls input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.removeButton {
+    align-self: start;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    color: var(--color-text-muted);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.removeButton:hover {
+    background-color: var(--color-border);
+    color: var(--color-text);
+}
+
+.removeButton:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.itemTotal {
+    margin: 0;
+    font-weight: 700;
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .item {
+        grid-template-columns: 90px minmax(0, 1fr);
+        grid-template-areas:
+            "image details"
+            "image total";
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .image {
+        width: 90px;
+        height: 120px;
+    }
+
+    .details {
+        padding-right: 1.5rem;
+    }
+
+    .removeButton {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+    }
+
+    .itemTotal {
+        grid-area: total;
+        justify-self: end;
+    }
+}

@@ -1,51 +1,89 @@
 import { useOutletContext, Link } from "react-router";
+import { useState } from "react";
 import CartItem from "../components/CartItem.jsx";
+import styles from "../styles/Cart.module.css";
 
 const Cart = () => {
-    const { cart, updateCartItemQuantity, removeCartItem } = useOutletContext();
+    const [isCheckedOut, setIsCheckedOut] = useState(false);
+    const { cart, updateCartItemQuantity, removeCartItem, clearCart } = useOutletContext();
+
+    const handleCheckout = () => {
+        clearCart();
+        setIsCheckedOut(true);
+    };
 
     if (!cart.length)
         return (
-            <section>
+
+            <main className={styles.emptyCart}>
+                {isCheckedOut && (
+                    <p className={styles.successMessage}>
+                        ✓ Order placed successfully!
+                    </p>
+                )}
+
                 <h2>Your cart is empty</h2>
                 <p>Looks like you haven't added anything to your cart yet.</p>
-                <Link to="/shop">Continue Shopping</Link>
-            </section>
-        )
+                <Link className={styles.continueButton} to="/shop">
+                    Continue Shopping
+                </Link>
+            </main>
+        );
 
-    const totalPrice = +cart.reduce((total, curr) => total + curr.price*curr.quantity, 0).toFixed(2);
+    const totalPrice = +cart
+        .reduce((total, curr) => total + curr.price * curr.quantity, 0)
+        .toFixed(2);
+
+    const totalItems = cart.reduce(
+        (total, curr) => total + curr.quantity,
+        0
+    );
 
     return (
-        <main>
+        <main className={styles.cart}>
             <h2>Your cart</h2>
 
-            <div>
-                <section>
-                    {cart.map(cartItem => <CartItem key={cartItem.id} id={cartItem.id} title={cartItem.title} price={cartItem.price} imgUrl={cartItem.imgUrl} quantity={cartItem.quantity} onUpdateCartItemQuantity={updateCartItemQuantity} onRemoveCartItem={removeCartItem} />)}
+            <div className={styles.cartLayout}>
+                <section className={styles.cartItems}>
+                    {cart.map(cartItem => (
+                        <CartItem
+                            key={cartItem.id}
+                            id={cartItem.id}
+                            title={cartItem.title}
+                            price={cartItem.price}
+                            imgUrl={cartItem.imgUrl}
+                            quantity={cartItem.quantity}
+                            onUpdateCartItemQuantity={updateCartItemQuantity}
+                            onRemoveCartItem={removeCartItem}
+                        />
+                    ))}
                 </section>
 
-                <aside>
+                <aside className={styles.summary}>
                     <h3>Order Summary</h3>
-                    <div>
-                        <p>Items </p>
-                        <p>{cart.reduce((total, curr) => total + curr.quantity, 0)}</p>
+
+                    <div className={styles.summaryRow}>
+                        <p>Items</p>
+                        <p>{totalItems}</p>
                     </div>
 
-                    <div>
-                        <p>Subtotal </p>
-                        <p>{totalPrice}</p>
+                    <div className={styles.summaryRow}>
+                        <p>Subtotal</p>
+                        <p>${totalPrice.toFixed(2)}</p>
                     </div>
 
-                    <div>
+                    <div className={styles.totalRow}>
                         <p>Total</p>
-                        <p>{totalPrice}</p>
+                        <p>${totalPrice.toFixed(2)}</p>
                     </div>
 
-                    <button type="button">Checkout</button>
+                    <button className={styles.checkoutButton} type="button" onClick={handleCheckout}>
+                        Checkout
+                    </button>
                 </aside>
             </div>
         </main>
-    )
-}
+    );
+};
 
 export default Cart;
